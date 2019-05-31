@@ -1,0 +1,74 @@
+.fancy-header {
+    color: white;
+    text-decoration: underline;
+    text-align: center;
+}
+h2 {
+    color: aliceblue;
+    text-decoration: underline;
+}
+* {
+    color: white;
+    font-family: Avenir, sans-serif;
+    /*background-color:black; Commented out to make page look better*/
+}
+table {
+    font-size: larger;
+    padding: 20px;
+}
+#table td {
+    font-size: inherit;
+    padding: inherit;
+}
+#table tr {
+    font-size: inherit;
+    padding: inherit;
+}
+.link {
+    color: lightblue;
+}
+.link:visited{
+    color: gold;
+}
+.link:hover{
+    color: white;
+}
+.link:active{
+    color:greenyellow;
+}
+h2.pretty{
+    text-align: center;
+}
+main{
+    background-image: url("../img/fireybackground.jpg");
+    background-size: 100% 100%;
+}
+.table {
+    display: table;   /* Allow the centering to work */
+    margin: 0 auto;
+}
+
+ul#horizontal-list{
+    min-width: 696px;
+    list-style: none;
+    padding-top: 20px;
+}
+ul#horizontal-list li{
+    display: inline;
+}
+ol#horizontal-list {
+    min-width: 696px;
+    list-style: none;
+    padding-top: 20px;
+}
+ol#horizontal-list li {
+    display: inline;
+}
+.last{
+    text-indent: 20px;
+}
+#venti{
+    display:table;
+    margin-right: auto;
+    margin-left: auto;
+}
