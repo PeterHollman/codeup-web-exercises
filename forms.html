@@ -7,7 +7,7 @@
 <body>
     <form method="POST" action="https://request-inspector.glitch.me/">
         <label for="email">Email</label>
-        <input id="email" name="email" type="text>" placeholder="Enter your Email address">
+        <input id="email" name="email" type="email" placeholder="Enter your Email address">
         <br>
         <label for="password">Password</label>
         <input id="password" name="password" type="password" placeholder="Enter your password">
@@ -28,8 +28,8 @@
         <label for="other">Other <input type="checkbox" name="how_did_you_hear_about_us" id="other" value="other">
         </label>
         <br>
-        <p>What browser are you using?</p>
-        <select name="What_browser_are_you_using?">
+        <label for="browser">What web browser are you using?</label>
+        <select name="browser" id="browser">
             <option value="Chrome">Google Chrome</option>
             <option value="Safari">Safari</option>
             <option value="Firefox">Mozilla Firefox</option>
