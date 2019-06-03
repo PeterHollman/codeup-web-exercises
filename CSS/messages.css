@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Ubuntu, sans-serif;
+}
+/*Use the following naming convention for the variables bg-info, text-info, bg-success, text-success,*/
+.message{
+    text-indent: 15px;
+    padding:5px;
+    margin-top: 5px;
+    border: gray 2px;
+    border-radius: 5px;
+}
+.message-info{
+    background-color:lightblue;
+    margin-bottom: 5px;
+    color: blue;
+    font-style: bold;
+}
+.message-success{
+    background-color:lightgreen;
+    margin-bottom: 5px;
+    color: green;
+    font-style: inherit;
+
+}
+.message-warning{
+    background-color:lightyellow;
+    margin-bottom: 5px;
+    color: gold;
+    font-style: inherit;
+}
+.message-error{
+    background-color: lightcoral;
+    margin-bottom: 5px;
+    color: red;
+    font-style: inherit;
+}
