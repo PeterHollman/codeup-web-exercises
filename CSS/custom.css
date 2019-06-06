@@ -1,0 +1,40 @@
+.sign-up{
+    text-decoration: none;
+    color: gray;
+}
+
+.nav-hover a.hover{
+    background-color: #E7E7E7;
+
+}
+.jumbotron{
+    background-image: url("../img/pizza.png");
+}
+.display-4{
+    opacity: 0.5;
+    text-align: center;
+    background-color: white;
+    width:100%;
+}
+.pizza-form{
+    text-align: left;
+}
+.sub-title-item{
+    background-color: #F7F7F7;
+}
+.card-header{
+    background-color: #037BFB;
+    text-align: left;
+    color: white;
+}
+.list-group{
+    margin-bottom: 10px;
+}
+
+.btn{
+    float: right;
+}
+.first-card{
+    if
+}
+
