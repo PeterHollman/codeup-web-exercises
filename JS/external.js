@@ -20,3 +20,13 @@ alert("Your paycheck will be " + totalPay + " dollars.  Treat Yo' Self 2019!");
 var classSchedule = confirm("Do you have a free period at 1130 for a coding class?");
 var classOpen = confirm("Does the class you want to join already have 20 people in it?");
 var bookClass = classSchedule && classOpen;
+alert("Student will be able to sign up for class " + bookClass);
+
+var premiumMember = confirm("Are you a premium member?");
+var moreThan1Item = false;
+if (premiumMember === false){
+moreThan1Item = confirm("Did you buy at least 2 items?");
+}
+var couponValid = confirm("Is the coupon valid?");
+var canUseCoupon = (premiumMember || moreThan1Item) && couponValid;
+alert("You can use the coupon " + canUseCoupon);
