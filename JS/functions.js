@@ -84,7 +84,7 @@ console.log(isTwo(random));
 var billPrice = Number(prompt("How much was your bill?"));
 var tipPercentage = Number(prompt("What percent would you like to tip?"));
 function calculateTip(){
-    return (billPrice * (tipPercentage *.01));
+    return (billPrice * (tipPercentage * .01));
 }
 alert("You should tip " + "$" + calculateTip().toFixed(2));
 
