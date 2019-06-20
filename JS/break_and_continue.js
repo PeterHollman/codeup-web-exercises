@@ -1,4 +1,3 @@
-
 while (true) {
 var theInput = Number(prompt("Please enter an odd number between 1-50"));
    if(theInput % 2 == 0 || theInput > 50){

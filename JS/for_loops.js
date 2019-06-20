@@ -1,5 +1,5 @@
 //Multiplication table
-randomNumber = Math.floor(Math.random() * 10) + 1;
+var randomNumber = Math.floor(Math.random() * 10) + 1;
 var i = 1;
 for (var multiply = randomNumber; i < 11; i++) {
     answer = i * randomNumber;
@@ -7,7 +7,7 @@ for (var multiply = randomNumber; i < 11; i++) {
 }
 
 //Random numbers odd and even
-for (var j = 0; j < 11; j++) {
+for (var j = 1; j < 11; j++) {
 var largeNumber = Math.floor(Math.random() * 180) + 20;
 var remainderNumber = largeNumber % 2;
 if(remainderNumber === 0){
