@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Guess a Number!</title>
 </head>
 <body>
-$END$
+    <script>
+    "use strict"
+    var randomNumber = Math.floor((Math.random()*20)+1);
+    var keepPlaying = true;
+    do{
+        var guess = parseInt(prompt("Please guess a number between 1 and 20"))
+            if(guess == randomNumber){
+                alert("You guessed right");
+                keepPlaying = false;
+            }
+            else if(guess > randomNumber){
+                alert("Too high!")
+            }
+            else{
+                alert("Too low");
+            }
+    } while(keepPlaying);
+
+    </script>
 </body>
 </html>

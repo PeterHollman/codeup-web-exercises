@@ -63,6 +63,7 @@ a {
 .profile-items{
     list-style: none;
     padding: 0;
+    margin: .5em;
 }
 .profile-entry{
     margin:.5em;

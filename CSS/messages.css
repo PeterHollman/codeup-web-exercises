@@ -9,32 +9,33 @@ body, html {
 .message{
     text-indent: 15px;
     padding:5px;
-    margin-top: 5px;
     border: gray 2px;
-    border-radius: 5px;
+    border-radius: .3em;
+    width: 90%;
+    margin: 0 auto;
 }
 .message-info{
-    background-color:lightblue;
+    background-color: #CDDEFF;
     margin-bottom: 5px;
-    color: blue;
+    color: #4C48A2;
     font-style: bold;
 }
 .message-success{
-    background-color:lightgreen;
+    background-color:#CFF3DA;
     margin-bottom: 5px;
-    color: green;
+    color: #02642C;
     font-style: inherit;
 
 }
 .message-warning{
-    background-color:lightyellow;
+    background-color:#FCFBC9;
     margin-bottom: 5px;
-    color: gold;
+    color: #87730D;
     font-style: inherit;
 }
 .message-error{
-    background-color: lightcoral;
+    background-color: #FAD3D7;
     margin-bottom: 5px;
-    color: red;
+    color: #81182F;
     font-style: inherit;
 }
