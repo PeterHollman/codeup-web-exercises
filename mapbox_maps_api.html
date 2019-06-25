@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapbox Exercise</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 700px;
+        }
+    </style>
+
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<script src="JS/mapbox-geocoder-utils.js"></script>
+<script src="JS/keys.js"></script>
+
+<button id="button1">My Favorite Restaurant</button>
+<button id="button2">My Second Favorite Restaurant</button>
+<button id="button3">My Third Favorite Restaurant</button>
+
+<div id='map'></div>
+
+<script>
+    mapboxgl.accessToken = mapBoxToken;
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 10,
+        center: [-91.1871, 30.4515]
+    });
+    var products = [
+        {
+            name: "The Chimes East",
+            typeOfFood: "Seafood",
+            price: "$$",
+            imgFile: "img/chimes.jpeg"
+        },
+        {
+            name: "Duang Tawan",
+            typeOfFood: "Thai",
+            price: "$"
+        },
+        {
+            name: "TJ Ribs",
+            typeOfFood: "BBQ",
+            price: "$$$"
+        }
+    ];
+    var popup1 = new mapboxgl.Popup({ offset: 25 })
+        .setHTML("<h3>" +  products[0].name + "</h3>" + products[0].typeOfFood + " " + products[0].price) + products[0].imgFile;
+    document.getElementById("button1").addEventListener("click",function() {
+        geocode("4019, 10870 Coursey Blvd, Baton Rouge, LA 70816", mapBoxToken).then(function (result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(17);
+            var marker = new mapboxgl.Marker()
+                .setLngLat(result)
+                .setPopup(popup1)
+                .addTo(map)
+        });
+    });
+    var popup2 = new mapboxgl.Popup({ offset: 25 })
+        .setHTML("<h3>" +  products[1].name + "</h3>" + products[1].typeOfFood + " " + products[1].price);
+    document.getElementById("button2").addEventListener("click",function() {
+        geocode("4850 S Sherwood Forest Blvd, Baton Rouge, LA 70816", mapBoxToken).then(function (result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(17);
+            var marker = new mapboxgl.Marker()
+                .setLngLat(result)
+                .setPopup(popup2)
+                .addTo(map)
+        });
+    });
+    var popup3 = new mapboxgl.Popup({ offset: 25 })
+        .setHTML("<h3>" +  products[2].name + "</h3>" + products[2].typeOfFood + " " + products[2].price);
+    document.getElementById("button3").addEventListener("click",function() {
+        geocode("324 S Acadian Thruway, Baton Rouge, LA 70808", mapBoxToken).then(function (result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(17);
+            var marker = new mapboxgl.Marker()
+                .setLngLat(result)
+                .setPopup(popup3)
+                .addTo(map)
+        });
+    });
+</script>
+
+</body>
+</html>
