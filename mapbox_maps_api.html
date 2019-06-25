@@ -9,7 +9,6 @@
             height: 700px;
         }
     </style>
-
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
@@ -35,8 +34,7 @@
         {
             name: "The Chimes East",
             typeOfFood: "Seafood",
-            price: "$$",
-            imgFile: "img/chimes.jpeg"
+            price: "$$"
         },
         {
             name: "Duang Tawan",
@@ -50,7 +48,7 @@
         }
     ];
     var popup1 = new mapboxgl.Popup({ offset: 25 })
-        .setHTML("<h3>" +  products[0].name + "</h3>" + products[0].typeOfFood + " " + products[0].price) + products[0].imgFile;
+        .setHTML("<h3>" +  products[0].name + "</h3>" + products[0].typeOfFood + " " + products[0].price);
     document.getElementById("button1").addEventListener("click",function() {
         geocode("4019, 10870 Coursey Blvd, Baton Rouge, LA 70816", mapBoxToken).then(function (result) {
             console.log(result);
