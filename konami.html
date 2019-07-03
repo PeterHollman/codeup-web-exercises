@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+</head>
+<body class="mainBody">
+<h1>Konami Code</h1>
+
+<main>
+
+</main>
+<script src="JS/jquery.js"></script>
+<script>
+    "use strict";
+
+    $(document).keyup(function(event){
+        console.log(event.keyCode);
+    });
+    function onKonamiCode(c) {
+        var input = '';
+        var key = '38384040373937396665';
+        $(document).on('keydown', function (e) {
+            input += ("" + e.keyCode);
+            if (input === key) {
+                return c();
+            }
+            if (!key.indexOf(input)) return;
+            input = ("" + e.keyCode);
+        });
+    }
+
+    onKonamiCode(function () {alert('You Entered the Konami Code')});
+
+    function onOtherCode(c) {
+        var input = '';
+        var key = '70738269707689';
+        $(document).on('keydown', function (e) {
+            input += ("" + e.keyCode);
+            if (input === key) {
+                return c();
+            }
+            if (!key.indexOf(input)) return;
+            input = ("" + e.keyCode);
+        });
+    }
+
+    onOtherCode(function () {
+       $("body").css("background-image", 'url("img/firefly.jpg")');
+    });
+
+    function onWomboCombo(c) {
+        var input = '';
+        var key = '8779776679';
+        $(document).on('keydown', function (e) {
+            input += ("" + e.keyCode);
+            if (input === key) {
+                return c();
+            }
+            if (!key.indexOf(input)) return;
+            input = ("" + e.keyCode);
+        });
+    }
+
+    onWomboCombo(function () {
+        window.location ='https://www.youtube.com/watch?v=pD_imYhNoQ4';
+    });
+
+    function onRosebud(c) {
+        var input = '';
+        var key = '82798369668568';
+        $(document).on('keydown', function (e) {
+            input += ("" + e.keyCode);
+            if (input === key) {
+                return c();
+            }
+            if (!key.indexOf(input)) return;
+            input = ("" + e.keyCode);
+        });
+    }
+
+    onRosebud(function () {
+        $("body").css("background-image", 'url("img/rosebudmoney.jpg")');
+    });
+
+    $(document).on("keydown", function (f) {
+        if(f.keyCode == "221"){
+            $("body").css("background-image", "none");
+            $("body").css("background-color", "purple");
+        }
+    });
+
+    $(document).on("keyup", function (f) {
+        if(f.keyCode == "221"){
+            $("body").css("background-color", "gold")
+        }
+    });
+
+</script>
+</body>
+</html>
