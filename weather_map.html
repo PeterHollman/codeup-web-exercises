@@ -76,7 +76,7 @@
                 var todayPressure = data.daily.data[0].pressure;
                 var todayWind = data.daily.data[0].windSpeed;
                 $("#todayTemp").html("High: " + todayTempHigh + "°F" + "<br>" + "Low: " + todayTempLow + "°F" + "<br>" + "Humidity: " + todayHumidity + "%" + "<br>" + "Wind: " + todayWind + "<br>" + "Pressure: " + todayPressure);
-                $("#locationToday").append(" in " + theLocation);
+                $("#locationToday").html("Today's Weather in " + theLocation);
 
                 var tomorrowTempHigh = data.daily.data[1].apparentTemperatureHigh;
                 var tomorrowTempLow = data.daily.data[1].apparentTemperatureLow;
@@ -84,6 +84,7 @@
                 var tomorrowPressure = data.daily.data[1].pressure;
                 var tomorrowWind = data.daily.data[1].windSpeed;
                 $("#tomorrowTemp").html("High: " + tomorrowTempHigh + "°F" + "<br>" + "Low: " + tomorrowTempLow + "°F" + "<br>" + "Humidity: " + tomorrowHumidity + "%" + "<br>" + "Wind: " + tomorrowWind + "<br>" + "Pressure: " + tomorrowPressure);
+                $("#locationTomorrow").html("Tomorrow's Weather in " + theLocation);
 
                 var nextDayTempHigh = data.daily.data[2].apparentTemperatureHigh;
                 var nextDayTempLow = data.daily.data[2].apparentTemperatureLow;
@@ -91,6 +92,7 @@
                 var nextDayPressure = data.daily.data[2].pressure;
                 var nextDayWind = data.daily.data[2].windSpeed;
                 $("#nextDayTemp").html("High: " + nextDayTempHigh + "°F" + "<br>" + "Low: " + nextDayTempLow + "°F" + "<br>" + "Humidity: " + nextDayHumidity + "%" + "<br>" + "Wind: " + nextDayWind + "<br>" + "Pressure: " + nextDayPressure);
+                $("#locationNextDay").html("The day after tomorrow's Weather in " + theLocation);
 
                 var background = document.getElementById("myImage");
                 var background2 = document.getElementById("myImage2");
