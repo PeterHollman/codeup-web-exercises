@@ -1,0 +1,8 @@
+.dark-text{
+    color: black;
+    position: absolute;
+    bottom: 400px;
+}
+.weatherImage{
+    background-size: cover;
+}

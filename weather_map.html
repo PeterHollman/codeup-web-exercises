@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Map</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/weather_map.css">
+</head>
+<body>
+
+<div class="bd-example">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div id="todayImage" class="carousel-item active weather-image">
+                <img id="myImage" class="d-block w-100 imageBack" alt="...">
+                <div class="carousel-caption d-none d-md-block dark-text">
+                    <h1>Today's Weather</h1>
+                    <p id="todayTemp">Your weather will load shortly</p>
+                </div>
+            </div>
+            <div id="tomorrowImage" class="carousel-item weather-image">
+                <img id="myImage2" class="d-block w-100 imageBack" alt="...">
+                <div class="carousel-caption d-none d-md-block dark-text">
+                    <h1>Tomorrow's Weather</h1>
+                    <p id="tomorrowTemp">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div id="nextDayImage" class="carousel-item weather-image">
+                <img id="myImage3" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block dark-text">
+                    <h1>The Day after tomorrow's weather</h1>
+                    <p id="nextDayTemp">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon dark-bg" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<div>
+    <form action="">
+        Latitude: <input type="text" name="latitude" id="latitude">
+        Longitude: <input type="text" name="longitude" id="longitude">
+        <input type="submit" value="Submit" id="submitButton">
+    </form>
+</div>
+
+
+    <div id="weather"></div>
+    <script src="JS/jquery.js"></script>
+    <script src="JS/keys.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+
+
+    <script>
+        $.get("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyToken + "/29.4241,-98.4936").done(function(data){
+            console.log(data);
+        var todayTempHigh = data.daily.data[0].apparentTemperatureHigh;
+        var todayTempLow = data.daily.data[0].apparentTemperatureLow;
+        var todayHumidity = (data.daily.data[0].humidity * 100).toFixed(0);
+        var todayPressure = data.daily.data[0].pressure;
+        var todayWind = data.daily.data[0].windSpeed;
+            $("#todayTemp").html("High: " + todayTempHigh + "°F" +  "<br>" + "Low: " + todayTempLow + "°F" + "<br>" + "Humidity: " + todayHumidity + "%" + "<br>"  + "Wind: " + todayWind + "<br>"+ "Pressure: " + todayPressure);
+
+            var tomorrowTempHigh = data.daily.data[1].apparentTemperatureHigh;
+            var tomorrowTempLow = data.daily.data[1].apparentTemperatureLow;
+            var tomorrowHumidity = (data.daily.data[1].humidity * 100).toFixed(0);
+            var tomorrowPressure = data.daily.data[1].pressure;
+            var tomorrowWind = data.daily.data[1].windSpeed;
+            $("#tomorrowTemp").html("High: " + tomorrowTempHigh + "°F" +  "<br>" + "Low: " + tomorrowTempLow + "°F" + "<br>" + "Humidity: " + tomorrowHumidity + "%" + "<br>"  + "Wind: " + tomorrowWind + "<br>"+ "Pressure: " + tomorrowPressure);
+
+            var nextDayTempHigh = data.daily.data[2].apparentTemperatureHigh;
+            var nextDayTempLow = data.daily.data[2].apparentTemperatureLow;
+            var nextDayHumidity = (data.daily.data[2].humidity * 100).toFixed(0);
+            var nextDayPressure = data.daily.data[2].pressure;
+            var nextDayWind = data.daily.data[2].windSpeed;
+            $("#nextDayTemp").html("High: " + nextDayTempHigh + "°F" +  "<br>" + "Low: " + nextDayTempLow + "°F" + "<br>" + "Humidity: " + nextDayHumidity + "%" + "<br>"  + "Wind: " + nextDayWind + "<br>"+ "Pressure: " + nextDayPressure);
+
+     // var images = ["img/clear-day.jpg", "img/clear-night.png", "img/rainbackground.jpg", "img/snow.jpeg", "img/sleet.jpg", "img/wind.jpg", "img/fog.jpg", "img/cloudy.png", "img/partly-cloudy-day.jpg", "img/partly-cloudy-night.jpg"];
+
+                 var background = document.getElementById("myImage");
+                 var background2 = document.getElementById("myImage2");
+                 var background3 = document.getElementById("myImage3");
+
+         switch (data.daily.data[0].icon) {
+             case "clear-day":
+                background.setAttribute("src", "img/clear-day.jpg");
+                background2.setAttribute("src", "img/clear-day.jpg");
+                 break;
+             case "clear-night":
+                 background.setAttribute("src", "img/clear-night.png");
+                 background2.setAttribute("src", "img/clear-night.png");
+                 break;
+             case "rain":
+                 background.setAttribute("src", "img/rainbackground.jpg");
+                 background2.setAttribute("src", "img/rainbackground.jpg");
+                 break;
+             case "snow":
+                 background.setAttribute("src", "img/snow.jpeg");
+                 background2.setAttribute("src", "img/snow.jpeg");
+                 break;
+             case "sleet":
+                 background.setAttribute("src", "img/sleet.jpg");
+                 background2.setAttribute("src", "img/sleet.jpg");
+                 break;
+             case "wind":
+                 background.setAttribute("src", "img/wind.jpg");
+                 background2.setAttribute("src", "img/wind.jpg");
+                 break;
+             case "fog":
+                 background.setAttribute("src", "img/fog.jpg");
+                 background2.setAttribute("src", "img/fog.jpg");
+                 break;
+             case "cloudy":
+                 background.setAttribute("src", "img/cloudy.jpg");
+                 background2.setAttribute("src", "img/cloudy.jpg");
+                 break;
+             case "partly-cloudy-day":
+                 background.setAttribute("src", "img/partly-cloudy-day.jpg");
+                 background2.setAttribute("src", "img/partly-cloudy-day.jpg");
+                 break;
+             case "partly-cloudy-night":
+                 background.setAttribute("src", "img/partly-cloudy-night.jpg");
+                 background2.setAttribute("src", "img/partly-cloudy-night.jpg");
+                 break;
+         }
+            switch (data.daily.data[1].icon) {
+                case "clear-day":
+                    background2.setAttribute("src", "img/clear-day.jpg");
+                    break;
+                case "clear-night":
+                    background2.setAttribute("src", "img/clear-night.png");
+                    break;
+                case "rain":
+                    background2.setAttribute("src", "img/rainbackground.jpg");
+                    break;
+                case "snow":
+                    background2.setAttribute("src", "img/snow.jpeg");
+                    break;
+                case "sleet":
+                    background2.setAttribute("src", "img/sleet.jpg");
+                    break;
+                case "wind":
+                    background2.setAttribute("src", "img/wind.jpg");
+                    break;
+                case "fog":
+                    background2.setAttribute("src", "img/fog.jpg");
+                    break;
+                case "cloudy":
+                    background2.setAttribute("src", "img/cloudy.jpg");
+                    break;
+                case "partly-cloudy-day":
+                    background2.setAttribute("src", "img/partly-cloudy-day.jpg");
+                    break;
+                case "partly-cloudy-night":
+                    background2.setAttribute("src", "img/partly-cloudy-night.jpg");
+                    break;
+            }
+
+            switch (data.daily.data[2].icon) {
+                case "clear-day":
+                    background3.setAttribute("src", "img/clear-day.jpg");
+                    break;
+                case "clear-night":
+                    background3.setAttribute("src", "img/clear-night.png");
+                    break;
+                case "rain":
+                    background3.setAttribute("src", "img/rainbackground.jpg");
+                    break;
+                case "snow":
+                    background3.setAttribute("src", "img/snow.jpeg");
+                    break;
+                case "sleet":
+                    background3.setAttribute("src", "img/sleet.jpg");
+                    break;
+                case "wind":
+                    background3.setAttribute("src", "img/wind.jpg");
+                    break;
+                case "fog":
+                    background3.setAttribute("src", "img/fog.jpg");
+                    break;
+                case "cloudy":
+                    background3.setAttribute("src", "img/cloudy.jpg");
+                    break;
+                case "partly-cloudy-day":
+                    background3.setAttribute("src", "img/partly-cloudy-day.jpg");
+                    break;
+                case "partly-cloudy-night":
+                    background3.setAttribute("src", "img/partly-cloudy-night.jpg");
+                    break;
+            }
+
+                    });
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
