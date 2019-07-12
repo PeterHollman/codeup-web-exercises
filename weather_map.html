@@ -19,21 +19,21 @@
             <div id="todayImage" class="carousel-item active weather-image">
                 <img id="myImage" class="d-block w-100 imageBack" alt="...">
                 <div class="carousel-caption d-none d-md-block dark-text">
-                    <h1>Today's Weather</h1>
+                    <h1 id="locationToday">Today's Weather</h1>
                     <p id="todayTemp">Your weather will load shortly</p>
                 </div>
             </div>
             <div id="tomorrowImage" class="carousel-item weather-image">
                 <img id="myImage2" class="d-block w-100 imageBack" alt="...">
                 <div class="carousel-caption d-none d-md-block dark-text">
-                    <h1>Tomorrow's Weather</h1>
+                    <h1 id="locationTomorrow">Tomorrow's Weather</h1>
                     <p id="tomorrowTemp">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
             <div id="nextDayImage" class="carousel-item weather-image">
                 <img id="myImage3" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block dark-text">
-                    <h1>The Day after tomorrow's weather</h1>
+                    <h1 id="locationNextDay">The Day after tomorrow's weather</h1>
                     <p id="nextDayTemp">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                 </div>
             </div>
@@ -49,7 +49,7 @@
     </div>
 </div>
 <div>
-    <form action="">
+    <form id="submitForm" action="">
         Latitude: <input type="text" name="latitude" id="latitude">
         Longitude: <input type="text" name="longitude" id="longitude">
         <input type="submit" value="Submit" id="submitButton">
@@ -64,148 +64,164 @@
 
 
     <script>
-        $.get("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyToken + "/29.4241,-98.4936").done(function(data){
-            console.log(data);
-        var todayTempHigh = data.daily.data[0].apparentTemperatureHigh;
-        var todayTempLow = data.daily.data[0].apparentTemperatureLow;
-        var todayHumidity = (data.daily.data[0].humidity * 100).toFixed(0);
-        var todayPressure = data.daily.data[0].pressure;
-        var todayWind = data.daily.data[0].windSpeed;
-            $("#todayTemp").html("High: " + todayTempHigh + "°F" +  "<br>" + "Low: " + todayTempLow + "°F" + "<br>" + "Humidity: " + todayHumidity + "%" + "<br>"  + "Wind: " + todayWind + "<br>"+ "Pressure: " + todayPressure);
+        var latitude = 29.4241;
+        var longitude = -98.4936;
+        function makeWeatherCall(latitude, longitude) {
+            $.get("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyToken + "/" + latitude + ", " + longitude).done(function (data) {
+                console.log(data);
+                var theLocation = data.timezone;
+                var todayTempHigh = data.daily.data[0].apparentTemperatureHigh;
+                var todayTempLow = data.daily.data[0].apparentTemperatureLow;
+                var todayHumidity = (data.daily.data[0].humidity * 100).toFixed(0);
+                var todayPressure = data.daily.data[0].pressure;
+                var todayWind = data.daily.data[0].windSpeed;
+                $("#todayTemp").html("High: " + todayTempHigh + "°F" + "<br>" + "Low: " + todayTempLow + "°F" + "<br>" + "Humidity: " + todayHumidity + "%" + "<br>" + "Wind: " + todayWind + "<br>" + "Pressure: " + todayPressure);
+                $("#locationToday").append(" in " + theLocation);
 
-            var tomorrowTempHigh = data.daily.data[1].apparentTemperatureHigh;
-            var tomorrowTempLow = data.daily.data[1].apparentTemperatureLow;
-            var tomorrowHumidity = (data.daily.data[1].humidity * 100).toFixed(0);
-            var tomorrowPressure = data.daily.data[1].pressure;
-            var tomorrowWind = data.daily.data[1].windSpeed;
-            $("#tomorrowTemp").html("High: " + tomorrowTempHigh + "°F" +  "<br>" + "Low: " + tomorrowTempLow + "°F" + "<br>" + "Humidity: " + tomorrowHumidity + "%" + "<br>"  + "Wind: " + tomorrowWind + "<br>"+ "Pressure: " + tomorrowPressure);
+                var tomorrowTempHigh = data.daily.data[1].apparentTemperatureHigh;
+                var tomorrowTempLow = data.daily.data[1].apparentTemperatureLow;
+                var tomorrowHumidity = (data.daily.data[1].humidity * 100).toFixed(0);
+                var tomorrowPressure = data.daily.data[1].pressure;
+                var tomorrowWind = data.daily.data[1].windSpeed;
+                $("#tomorrowTemp").html("High: " + tomorrowTempHigh + "°F" + "<br>" + "Low: " + tomorrowTempLow + "°F" + "<br>" + "Humidity: " + tomorrowHumidity + "%" + "<br>" + "Wind: " + tomorrowWind + "<br>" + "Pressure: " + tomorrowPressure);
 
-            var nextDayTempHigh = data.daily.data[2].apparentTemperatureHigh;
-            var nextDayTempLow = data.daily.data[2].apparentTemperatureLow;
-            var nextDayHumidity = (data.daily.data[2].humidity * 100).toFixed(0);
-            var nextDayPressure = data.daily.data[2].pressure;
-            var nextDayWind = data.daily.data[2].windSpeed;
-            $("#nextDayTemp").html("High: " + nextDayTempHigh + "°F" +  "<br>" + "Low: " + nextDayTempLow + "°F" + "<br>" + "Humidity: " + nextDayHumidity + "%" + "<br>"  + "Wind: " + nextDayWind + "<br>"+ "Pressure: " + nextDayPressure);
+                var nextDayTempHigh = data.daily.data[2].apparentTemperatureHigh;
+                var nextDayTempLow = data.daily.data[2].apparentTemperatureLow;
+                var nextDayHumidity = (data.daily.data[2].humidity * 100).toFixed(0);
+                var nextDayPressure = data.daily.data[2].pressure;
+                var nextDayWind = data.daily.data[2].windSpeed;
+                $("#nextDayTemp").html("High: " + nextDayTempHigh + "°F" + "<br>" + "Low: " + nextDayTempLow + "°F" + "<br>" + "Humidity: " + nextDayHumidity + "%" + "<br>" + "Wind: " + nextDayWind + "<br>" + "Pressure: " + nextDayPressure);
 
-     // var images = ["img/clear-day.jpg", "img/clear-night.png", "img/rainbackground.jpg", "img/snow.jpeg", "img/sleet.jpg", "img/wind.jpg", "img/fog.jpg", "img/cloudy.png", "img/partly-cloudy-day.jpg", "img/partly-cloudy-night.jpg"];
+                var background = document.getElementById("myImage");
+                var background2 = document.getElementById("myImage2");
+                var background3 = document.getElementById("myImage3");
 
-                 var background = document.getElementById("myImage");
-                 var background2 = document.getElementById("myImage2");
-                 var background3 = document.getElementById("myImage3");
+                switch (data.daily.data[0].icon) {
+                    case "clear-day":
+                        background.setAttribute("src", "img/clear-day.jpg");
+                        background2.setAttribute("src", "img/clear-day.jpg");
+                        break;
+                    case "clear-night":
+                        background.setAttribute("src", "img/clear-night.png");
+                        background2.setAttribute("src", "img/clear-night.png");
+                        break;
+                    case "rain":
+                        background.setAttribute("src", "img/rainbackground.jpg");
+                        background2.setAttribute("src", "img/rainbackground.jpg");
+                        break;
+                    case "snow":
+                        background.setAttribute("src", "img/snow.jpeg");
+                        background2.setAttribute("src", "img/snow.jpeg");
+                        break;
+                    case "sleet":
+                        background.setAttribute("src", "img/sleet.jpg");
+                        background2.setAttribute("src", "img/sleet.jpg");
+                        break;
+                    case "wind":
+                        background.setAttribute("src", "img/wind.jpg");
+                        background2.setAttribute("src", "img/wind.jpg");
+                        break;
+                    case "fog":
+                        background.setAttribute("src", "img/fog.jpg");
+                        background2.setAttribute("src", "img/fog.jpg");
+                        break;
+                    case "cloudy":
+                        background.setAttribute("src", "img/cloudy.jpg");
+                        background2.setAttribute("src", "img/cloudy.jpg");
+                        break;
+                    case "partly-cloudy-day":
+                        background.setAttribute("src", "img/partly-cloudy-day.jpg");
+                        background2.setAttribute("src", "img/partly-cloudy-day.jpg");
+                        break;
+                    case "partly-cloudy-night":
+                        background.setAttribute("src", "img/partly-cloudy-night.jpg");
+                        background2.setAttribute("src", "img/partly-cloudy-night.jpg");
+                        break;
+                }
+                switch (data.daily.data[1].icon) {
+                    case "clear-day":
+                        background2.setAttribute("src", "img/clear-day.jpg");
+                        break;
+                    case "clear-night":
+                        background2.setAttribute("src", "img/clear-night.png");
+                        break;
+                    case "rain":
+                        background2.setAttribute("src", "img/rainbackground.jpg");
+                        break;
+                    case "snow":
+                        background2.setAttribute("src", "img/snow.jpeg");
+                        break;
+                    case "sleet":
+                        background2.setAttribute("src", "img/sleet.jpg");
+                        break;
+                    case "wind":
+                        background2.setAttribute("src", "img/wind.jpg");
+                        break;
+                    case "fog":
+                        background2.setAttribute("src", "img/fog.jpg");
+                        break;
+                    case "cloudy":
+                        background2.setAttribute("src", "img/cloudy.jpg");
+                        break;
+                    case "partly-cloudy-day":
+                        background2.setAttribute("src", "img/partly-cloudy-day.jpg");
+                        break;
+                    case "partly-cloudy-night":
+                        background2.setAttribute("src", "img/partly-cloudy-night.jpg");
+                        break;
+                }
 
-         switch (data.daily.data[0].icon) {
-             case "clear-day":
-                background.setAttribute("src", "img/clear-day.jpg");
-                background2.setAttribute("src", "img/clear-day.jpg");
-                 break;
-             case "clear-night":
-                 background.setAttribute("src", "img/clear-night.png");
-                 background2.setAttribute("src", "img/clear-night.png");
-                 break;
-             case "rain":
-                 background.setAttribute("src", "img/rainbackground.jpg");
-                 background2.setAttribute("src", "img/rainbackground.jpg");
-                 break;
-             case "snow":
-                 background.setAttribute("src", "img/snow.jpeg");
-                 background2.setAttribute("src", "img/snow.jpeg");
-                 break;
-             case "sleet":
-                 background.setAttribute("src", "img/sleet.jpg");
-                 background2.setAttribute("src", "img/sleet.jpg");
-                 break;
-             case "wind":
-                 background.setAttribute("src", "img/wind.jpg");
-                 background2.setAttribute("src", "img/wind.jpg");
-                 break;
-             case "fog":
-                 background.setAttribute("src", "img/fog.jpg");
-                 background2.setAttribute("src", "img/fog.jpg");
-                 break;
-             case "cloudy":
-                 background.setAttribute("src", "img/cloudy.jpg");
-                 background2.setAttribute("src", "img/cloudy.jpg");
-                 break;
-             case "partly-cloudy-day":
-                 background.setAttribute("src", "img/partly-cloudy-day.jpg");
-                 background2.setAttribute("src", "img/partly-cloudy-day.jpg");
-                 break;
-             case "partly-cloudy-night":
-                 background.setAttribute("src", "img/partly-cloudy-night.jpg");
-                 background2.setAttribute("src", "img/partly-cloudy-night.jpg");
-                 break;
-         }
-            switch (data.daily.data[1].icon) {
-                case "clear-day":
-                    background2.setAttribute("src", "img/clear-day.jpg");
-                    break;
-                case "clear-night":
-                    background2.setAttribute("src", "img/clear-night.png");
-                    break;
-                case "rain":
-                    background2.setAttribute("src", "img/rainbackground.jpg");
-                    break;
-                case "snow":
-                    background2.setAttribute("src", "img/snow.jpeg");
-                    break;
-                case "sleet":
-                    background2.setAttribute("src", "img/sleet.jpg");
-                    break;
-                case "wind":
-                    background2.setAttribute("src", "img/wind.jpg");
-                    break;
-                case "fog":
-                    background2.setAttribute("src", "img/fog.jpg");
-                    break;
-                case "cloudy":
-                    background2.setAttribute("src", "img/cloudy.jpg");
-                    break;
-                case "partly-cloudy-day":
-                    background2.setAttribute("src", "img/partly-cloudy-day.jpg");
-                    break;
-                case "partly-cloudy-night":
-                    background2.setAttribute("src", "img/partly-cloudy-night.jpg");
-                    break;
-            }
+                switch (data.daily.data[2].icon) {
+                    case "clear-day":
+                        background3.setAttribute("src", "img/clear-day.jpg");
+                        break;
+                    case "clear-night":
+                        background3.setAttribute("src", "img/clear-night.png");
+                        break;
+                    case "rain":
+                        background3.setAttribute("src", "img/rainbackground.jpg");
+                        break;
+                    case "snow":
+                        background3.setAttribute("src", "img/snow.jpeg");
+                        break;
+                    case "sleet":
+                        background3.setAttribute("src", "img/sleet.jpg");
+                        break;
+                    case "wind":
+                        background3.setAttribute("src", "img/wind.jpg");
+                        break;
+                    case "fog":
+                        background3.setAttribute("src", "img/fog.jpg");
+                        break;
+                    case "cloudy":
+                        background3.setAttribute("src", "img/cloudy.jpg");
+                        break;
+                    case "partly-cloudy-day":
+                        background3.setAttribute("src", "img/partly-cloudy-day.jpg");
+                        break;
+                    case "partly-cloudy-night":
+                        background3.setAttribute("src", "img/partly-cloudy-night.jpg");
+                        break;
+                }
 
-            switch (data.daily.data[2].icon) {
-                case "clear-day":
-                    background3.setAttribute("src", "img/clear-day.jpg");
-                    break;
-                case "clear-night":
-                    background3.setAttribute("src", "img/clear-night.png");
-                    break;
-                case "rain":
-                    background3.setAttribute("src", "img/rainbackground.jpg");
-                    break;
-                case "snow":
-                    background3.setAttribute("src", "img/snow.jpeg");
-                    break;
-                case "sleet":
-                    background3.setAttribute("src", "img/sleet.jpg");
-                    break;
-                case "wind":
-                    background3.setAttribute("src", "img/wind.jpg");
-                    break;
-                case "fog":
-                    background3.setAttribute("src", "img/fog.jpg");
-                    break;
-                case "cloudy":
-                    background3.setAttribute("src", "img/cloudy.jpg");
-                    break;
-                case "partly-cloudy-day":
-                    background3.setAttribute("src", "img/partly-cloudy-day.jpg");
-                    break;
-                case "partly-cloudy-night":
-                    background3.setAttribute("src", "img/partly-cloudy-night.jpg");
-                    break;
-            }
+            });
+        }
+        makeWeatherCall(latitude, longitude);
 
-                    });
-
-
-
-
+        // function changeLatLong(e) {
+        //     e.preventDefault();
+        //     document.getElementById('submitButton').submit();
+        //     var latitude = document.getElementById("latitude");
+        //     var longitutde = document.getElementById("longitude");
+        // }
+        document.getElementById("submitButton").addEventListener("click", function(event){
+            event.preventDefault();
+            var latitude = document.getElementById("latitude").value;
+            var longitude = document.getElementById("longitude").value;
+            console.log(latitude + longitude);
+            makeWeatherCall(latitude, longitude);
+        });
+    // changeLatLong();
 
 
 
