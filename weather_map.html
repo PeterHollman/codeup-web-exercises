@@ -5,6 +5,8 @@
     <title>Weather Map</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS/weather_map.css">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 <body>
 
@@ -56,6 +58,10 @@
     </form>
 </div>
 
+<hr>
+
+<div id='map'></div>
+
 
     <div id="weather"></div>
     <script src="JS/jquery.js"></script>
@@ -66,17 +72,68 @@
     <script>
         var latitude = 29.4241;
         var longitude = -98.4936;
-        function makeWeatherCall(latitude, longitude) {
+        var promiseLocation;
+
+        // function reverseGeocode(coordinates) {
+        //     var baseUrl = 'https://api.mapbox.com';
+        //     var endPoint = '/geocoding/v5/mapbox.places/';
+        //     return fetch(baseUrl + endPoint + coordinates.lng + "," + coordinates.lat + '.json' + "?" + 'access_token=' + mapBoxToken)
+        //         .then(function(res) {
+        //             return res.json();
+        //         })
+        //         // to get all the data from the request, comment out the following three lines...
+        //         .then(function(data) {
+        //             console.log(data);
+        //             return data.features[0].context[2].text;
+        //         });
+        // }
+        //
+        // // reverse geocode method from mapbox-geocoder-utils.js
+        // reverseGeocode({lng: -98.4861, lat: 29.4260}, accessToken).then(function(results) {
+        //     // logs the address for The Alamo
+        //     console.log(results);
+        //     return results;
+        // });
+
+        function reverseGeocode(longitude, latitude ) {
+            var baseUrl = 'https://api.mapbox.com';
+            var endPoint = '/geocoding/v5/mapbox.places/';
+            return fetch(baseUrl + endPoint + longitude + "," + latitude + '.json' + "?" + 'access_token=' + mapBoxToken)
+                .then(function(res) {
+                    return res.json();
+                })
+                // to get all the data from the request, comment out the following three lines...
+                .then(function(data) {
+                    console.log(data);
+                    promiseLocation = data.features[0].context[2].text;
+                    return data.features[0].context[2].text;
+
+                });
+        }
+
+        // reverse geocode method from mapbox-geocoder-utils.js
+        reverseGeocode(longitude, latitude).then(function(results) {
+            // logs the address for The Alamo
+            console.log("in reverse geocode!!!");
+            console.log(results);
+            promiseLocation = results;
+            makeWeatherCall(latitude, longitude, promiseLocation);
+
+        });
+
+        function makeWeatherCall(latitude, longitude, promiseLocation) {
+            console.log(promiseLocation);
+
             $.get("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyToken + "/" + latitude + ", " + longitude).done(function (data) {
                 console.log(data);
-                var theLocation = data.timezone;
                 var todayTempHigh = data.daily.data[0].apparentTemperatureHigh;
                 var todayTempLow = data.daily.data[0].apparentTemperatureLow;
                 var todayHumidity = (data.daily.data[0].humidity * 100).toFixed(0);
                 var todayPressure = data.daily.data[0].pressure;
                 var todayWind = data.daily.data[0].windSpeed;
                 $("#todayTemp").html("High: " + todayTempHigh + "°F" + "<br>" + "Low: " + todayTempLow + "°F" + "<br>" + "Humidity: " + todayHumidity + "%" + "<br>" + "Wind: " + todayWind + "<br>" + "Pressure: " + todayPressure);
-                $("#locationToday").html("Today's Weather in " + theLocation);
+                // $("#locationToday").html("Today's Weather in " + reverseGeocode(longitude, latitude));
+                $("#locationToday").html("Today's Weather in " + promiseLocation);
 
                 var tomorrowTempHigh = data.daily.data[1].apparentTemperatureHigh;
                 var tomorrowTempLow = data.daily.data[1].apparentTemperatureLow;
@@ -84,7 +141,7 @@
                 var tomorrowPressure = data.daily.data[1].pressure;
                 var tomorrowWind = data.daily.data[1].windSpeed;
                 $("#tomorrowTemp").html("High: " + tomorrowTempHigh + "°F" + "<br>" + "Low: " + tomorrowTempLow + "°F" + "<br>" + "Humidity: " + tomorrowHumidity + "%" + "<br>" + "Wind: " + tomorrowWind + "<br>" + "Pressure: " + tomorrowPressure);
-                $("#locationTomorrow").html("Tomorrow's Weather in " + theLocation);
+                $("#locationTomorrow").html("Tomorrow's Weather in " + promiseLocation);
 
                 var nextDayTempHigh = data.daily.data[2].apparentTemperatureHigh;
                 var nextDayTempLow = data.daily.data[2].apparentTemperatureLow;
@@ -92,7 +149,7 @@
                 var nextDayPressure = data.daily.data[2].pressure;
                 var nextDayWind = data.daily.data[2].windSpeed;
                 $("#nextDayTemp").html("High: " + nextDayTempHigh + "°F" + "<br>" + "Low: " + nextDayTempLow + "°F" + "<br>" + "Humidity: " + nextDayHumidity + "%" + "<br>" + "Wind: " + nextDayWind + "<br>" + "Pressure: " + nextDayPressure);
-                $("#locationNextDay").html("The day after tomorrow's Weather in " + theLocation);
+                $("#locationNextDay").html("The day after tomorrow's Weather in " + promiseLocation);
 
                 var background = document.getElementById("myImage");
                 var background2 = document.getElementById("myImage2");
@@ -101,43 +158,33 @@
                 switch (data.daily.data[0].icon) {
                     case "clear-day":
                         background.setAttribute("src", "img/clear-day.jpg");
-                        background2.setAttribute("src", "img/clear-day.jpg");
                         break;
                     case "clear-night":
                         background.setAttribute("src", "img/clear-night.png");
-                        background2.setAttribute("src", "img/clear-night.png");
                         break;
                     case "rain":
                         background.setAttribute("src", "img/rainbackground.jpg");
-                        background2.setAttribute("src", "img/rainbackground.jpg");
                         break;
                     case "snow":
                         background.setAttribute("src", "img/snow.jpeg");
-                        background2.setAttribute("src", "img/snow.jpeg");
                         break;
                     case "sleet":
                         background.setAttribute("src", "img/sleet.jpg");
-                        background2.setAttribute("src", "img/sleet.jpg");
                         break;
                     case "wind":
                         background.setAttribute("src", "img/wind.jpg");
-                        background2.setAttribute("src", "img/wind.jpg");
                         break;
                     case "fog":
                         background.setAttribute("src", "img/fog.jpg");
-                        background2.setAttribute("src", "img/fog.jpg");
                         break;
                     case "cloudy":
                         background.setAttribute("src", "img/cloudy.jpg");
-                        background2.setAttribute("src", "img/cloudy.jpg");
                         break;
                     case "partly-cloudy-day":
                         background.setAttribute("src", "img/partly-cloudy-day.jpg");
-                        background2.setAttribute("src", "img/partly-cloudy-day.jpg");
                         break;
                     case "partly-cloudy-night":
                         background.setAttribute("src", "img/partly-cloudy-night.jpg");
-                        background2.setAttribute("src", "img/partly-cloudy-night.jpg");
                         break;
                 }
                 switch (data.daily.data[1].icon) {
@@ -208,22 +255,41 @@
 
             });
         }
-        makeWeatherCall(latitude, longitude);
+        // makeWeatherCall(latitude, longitude);
 
-        // function changeLatLong(e) {
-        //     e.preventDefault();
-        //     document.getElementById('submitButton').submit();
-        //     var latitude = document.getElementById("latitude");
-        //     var longitutde = document.getElementById("longitude");
-        // }
+
+
+
+        var accessToken = mapBoxToken;
+        mapboxgl.accessToken = accessToken;
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            zoom: 10,
+            center: [-98.4916, 29.4252]
+        });
+
+
         document.getElementById("submitButton").addEventListener("click", function(event){
             event.preventDefault();
             var latitude = document.getElementById("latitude").value;
             var longitude = document.getElementById("longitude").value;
             console.log(latitude + longitude);
-            makeWeatherCall(latitude, longitude);
+            reverseGeocode(longitude, latitude).then(function (results) {
+                console.log(results);
+                promiseLocation = results;
+                makeWeatherCall(latitude, longitude, promiseLocation);
+
+            });
         });
-    // changeLatLong();
+
+        // mapboxgl.accessToken = mapBoxToken;
+        // var map = new mapboxgl.Map({
+        //     container: 'map',
+        //     style: 'mapbox://styles/mapbox/streets-v9',
+        //     zoom: 10,
+        //     center: [-91.1871, 30.4515]
+        // });
 
 
 
