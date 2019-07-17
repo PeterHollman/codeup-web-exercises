@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    //rewrite this as an arrow function
+    //give greeting a default value of "Good Morning"
+    //give cohort a default value of "Betelgeuse"
+    //rewrite the return to use template strings instead of concatenation
+    //can define outside of the function
+
+    const goodMorning = (greeting = "Good Morning", cohort = "Betelguese") => `${greeting} ${cohort}!`;
+
+    console.log(goodMorning());
+    console.log(goodMorning(undefined, "Ceres"));
+
+</script>
+
+</body>
+</html>
