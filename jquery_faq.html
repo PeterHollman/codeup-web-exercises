@@ -14,10 +14,21 @@
         .card-line{
             display: inline-block;
         }
+        .start-hidden{
+            visibility: hidden;
+        }
     </style>
 
 </head>
 <body>
+
+<div>
+    <h1>Would you like to sign up for our newsletter?</h1>
+    <span class="subscribe">X</span>
+
+</div>
+
+<h2 id="showsUp">Please sign up for our newsletter</h2>
 <h1>National Park Facts</h1>
 
 <dl>
@@ -46,28 +57,28 @@
     </dd>
 </dl>
 <button type="button" class="toggle">Toggle the Facts</button>
-<div>
+<div class="showStuff">
 
     <h3 class="murica">Grand Canyon</h3>
-    <ul>
+    <ul class="start-hidden">
         <li>Basically just a hole in the ground</li>
         <li>Grand? According to who</li>
         <li>In Arizona, but created by the Colorado River? Get your shit together</li>
         <li>Inspired the Luis Sacher novel "Holes"</li>
     </ul>
 </div>
-<div>
+<div class="showStuff">
     <h3 class="murica">Yosemite</h3>
-    <ul>
+    <ul class="start-hidden">
         <li>Not pronouced "yos-mite"</li>
         <li>Only the second National Park</li>
         <li>Yosemite falls only second tallest waterfall in world - seeing a trend yet?</li>
         <li>If you ain't first you're last</li>
     </ul>
 </div>
-<div>
+<div class="showStuff">
     <h3 class="murica">Yellowstone</h3>
-    <ul>
+    <ul class="start-hidden">
         <li>Thinks it's a trend setter by being the first national park</li>
         <li>In three seperate states, yet they all still suck</li>
         <li>Poorly named, should be called "Gushing Water"</li>
@@ -78,53 +89,62 @@
 <br>
 <div>
 
-    <div class="card card-line card-1" style="width: 18rem;">
-        <img class="card-img-top" src="img/rosebudmoney.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Money</h5>
-            <p class="card-text">Dropping Dimes </p>
-            <a class="btn btn-primary move-left">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card card-line card-2" style="width: 18rem;">
-        <img class="card-img-top" src="img/handshake.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Firm Handshakes</h5>
-            <p class="card-text">The Two Time back to back</p>
-            <a class="btn btn-primary move-either">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card card-line card-3" style="width: 18rem;">
-        <img class="card-img-top" src="img/Fistbump.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Catchy Title</h5>
-            <p class="card-text">Funny text</p>
-            <a class="btn btn-primary move-right">Go somewhere</a>
-        </div>
-    </div>
+<!--    <div class="card card-line card-1" style="width: 18rem;">-->
+<!--        <img class="card-img-top" src="img/rosebudmoney.jpg" alt="Card image cap">-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title">Money</h5>-->
+<!--            <p class="card-text">Dropping Dimes </p>-->
+<!--            <a class="btn btn-primary move-left">Go somewhere</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="card card-line card-2" style="width: 18rem;">-->
+<!--        <img class="card-img-top" src="img/handshake.jpg" alt="Card image cap">-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title">Firm Handshakes</h5>-->
+<!--            <p class="card-text">The Two Time back to back</p>-->
+<!--            <a class="btn btn-primary move-either">Go somewhere</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="card card-line card-3" style="width: 18rem;">-->
+<!--        <img class="card-img-top" src="img/Fistbump.jpg" alt="Card image cap">-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title">Catchy Title</h5>-->
+<!--            <p class="card-text">Funny text</p>-->
+<!--            <a class="btn btn-primary move-right">Go somewhere</a>-->
+<!--        </div>-->
+<!--    </div>-->
 
 </div>
 <script src="JS/jquery.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 <script>
-    $(".toggle").click(function(){
-        $('dd').toggleClass('invisible');
-    });
-    $(".highlight").click(function(){
-        $("dt").toggleClass("highlight");
-    });
-    $(".newButton").click(function(){
-        $("ul").each(function () {
-            $(this).children().last().css("background-color", "yellow");
+    $(document).ready(function(){
+
+        $(".toggle").click(function(){
+            $('dd').toggleClass('invisible');
         });
-    });
-    $(".murica").click(function(){
-        $(this).next().children().css("font-weight", "bold");
-    });
-    $("li").click(function(){
-        $(this).parent().children().first().css("color", "blue");
+        $(".highlight").click(function(){
+            $("dt").toggleClass("highlight");
+        });
+        $(".newButton").click(function(){
+            $("ul").each(function () {
+                $(this).children().last().css("background-color", "yellow");
+            });
+        });
+        $(".murica").click(function(){
+            $(this).next().children().css("font-weight", "bold");
+        });
+        $("li").click(function(){
+            $(this).parent().children().first().css("color", "blue");
+        });
+        $(".subscribe").click(function(){
+            $(this).parent().hide();
+        });
+        $(".showStuff").click(function(){
+            $(this).children().last().removeClass("start-hidden");
+        });
+        $('#showsUp').hide().fadeIn(8000);
     });
 
 
