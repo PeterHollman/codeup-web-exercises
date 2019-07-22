@@ -20,7 +20,6 @@ function commits(username) {
             console.log(data)
 
             const userData = data.filter((gitStat) => {
-                // console.log(gitStat);
                 if (gitStat.type === "PushEvent") {
                     return gitStat
                 }

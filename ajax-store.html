@@ -47,7 +47,7 @@
         });
         $("#insertProducts").append(html);
     }
-    $.ajax("data/")
+    $.ajax("data/inventory.json");
     $(".reload").on("click", function (){
         $("#insertProducts").html("");
         makeRequest();
