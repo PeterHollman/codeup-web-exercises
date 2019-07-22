@@ -60,7 +60,7 @@
 
 <hr>
 
-<div id='map'></div>
+<div id='map' class="row"></div>
 
 
     <div id="weather"></div>
@@ -73,27 +73,6 @@
         var latitude = 29.4241;
         var longitude = -98.4936;
         var promiseLocation;
-
-        // function reverseGeocode(coordinates) {
-        //     var baseUrl = 'https://api.mapbox.com';
-        //     var endPoint = '/geocoding/v5/mapbox.places/';
-        //     return fetch(baseUrl + endPoint + coordinates.lng + "," + coordinates.lat + '.json' + "?" + 'access_token=' + mapBoxToken)
-        //         .then(function(res) {
-        //             return res.json();
-        //         })
-        //         // to get all the data from the request, comment out the following three lines...
-        //         .then(function(data) {
-        //             console.log(data);
-        //             return data.features[0].context[2].text;
-        //         });
-        // }
-        //
-        // // reverse geocode method from mapbox-geocoder-utils.js
-        // reverseGeocode({lng: -98.4861, lat: 29.4260}, accessToken).then(function(results) {
-        //     // logs the address for The Alamo
-        //     console.log(results);
-        //     return results;
-        // });
 
         function reverseGeocode(longitude, latitude ) {
             var baseUrl = 'https://api.mapbox.com';
@@ -114,8 +93,6 @@
         // reverse geocode method from mapbox-geocoder-utils.js
         reverseGeocode(longitude, latitude).then(function(results) {
             // logs the address for The Alamo
-            console.log("in reverse geocode!!!");
-            console.log(results);
             promiseLocation = results;
             makeWeatherCall(latitude, longitude, promiseLocation);
 
@@ -255,7 +232,7 @@
 
             });
         }
-        // makeWeatherCall(latitude, longitude);
+        makeWeatherCall(latitude, longitude);
 
 
 
@@ -283,13 +260,13 @@
             });
         });
 
-        // mapboxgl.accessToken = mapBoxToken;
-        // var map = new mapboxgl.Map({
-        //     container: 'map',
-        //     style: 'mapbox://styles/mapbox/streets-v9',
-        //     zoom: 10,
-        //     center: [-91.1871, 30.4515]
-        // });
+        mapboxgl.accessToken = mapBoxToken;
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            zoom: 10,
+            center: [-91.1871, 30.4515]
+        });
 
 
 
