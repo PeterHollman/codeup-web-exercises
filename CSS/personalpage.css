@@ -1,0 +1,33 @@
+body{
+    background-image: url("../img/backgroundpersonal.jpeg");
+}
+
+.container-background{
+    background-image: url("../img/riverwalk.jpg");
+}
+.on-jumbo{
+    color: white;
+}
+.nav-background{
+    background-image: url("../img/backgroundpersonal.jpeg");
+}
+.links{
+    float: right;
+    font-weight: bold;
+}
+.bottompage{
+    position: absolute;
+    bottom: 5px;
+}
+.padding-less{
+    padding: 0;
+}
+.samesizepicture{
+    height: 225px;
+    width: 225px;
+}
+.imgcontainer{
+    position: absolute;
+    left: 15em;
+    bottom: 14em;
+}

@@ -5,26 +5,16 @@
     <meta charset="utf8">
 </head>
 <body>
-<h1 id="user_display">show the input here with button click</h1>
-<input id="user_input">
-<button id="clickme">click me</button>
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     "use strict"
-    let clock = 0;
+    const p = new Promise((resolve, reject) => {
+        resolve(3);
+    });
 
-    let timer = setInterval(function(){
-        console.log(clock++ * 10);
-        }, 0);
-
-    let url = "https://swapi.co/api/";
-    fetch(url)
-        .then(function(){
-            console.log("ding");
-            clearInterval(clock);
-        })
-
+    p.then(result => console.log(result));
+    p.catch(error => console.log('An error occured!'));
 </script>
 </body>
 </html>

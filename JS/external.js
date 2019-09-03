@@ -30,3 +30,5 @@ moreThan1Item = confirm("Did you buy at least 2 items?");
 var couponValid = confirm("Is the coupon valid?");
 var canUseCoupon = (premiumMember || moreThan1Item) && couponValid;
 alert("You can use the coupon " + canUseCoupon);
+
+//comment so it will be added to github
